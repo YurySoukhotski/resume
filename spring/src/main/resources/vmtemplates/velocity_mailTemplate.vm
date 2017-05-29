@@ -1,0 +1,12 @@
+<html>
+    <body>
+        <h3>Dear ${order.getNameGuest()}, thank you for placing order.</h3>
+        <div>
+            Your order 
+            with date:${order.getDateStart()} / ${order.getDateEnd()} in room ${order.getRoom()}
+            is rejected.
+            Sorry   
+        </div>
+        <span>Sent using Velocity Template</span>
+    </body>
+</html>

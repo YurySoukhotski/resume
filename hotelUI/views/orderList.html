@@ -1,0 +1,15 @@
+<div ng-controller="OrderController" layout="column" ng-cloak class="md-inline-form">
+    <div ng-cloak>
+        <md-content>
+            <md-tabs md-dynamic-height md-border-bottom md-selected="selectedIndex">
+                <md-tab label="List orders"  ng-disabled="startShow">
+                    <div ng-include="'views/template/order.tpl.html'"></div>
+                </md-tab>
+                <md-tab label="Order info" ng-disabled="infoShow">
+                <div ng-include="'views/template/orderCard.tpl.html'"></div>
+                </md-tab>
+            </md-tabs>
+        </md-content>
+    </div>
+</div>
+

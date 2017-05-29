@@ -1,0 +1,33 @@
+<div ng-controller="OrderBookingController as booking" layout="column" ng-cloak class="md-inline-form">
+
+    <div ng-cloak>
+        <md-content>
+            <md-tabs md-dynamic-height md-border-bottom md-selected="booking.selectedIndex">
+                <md-tab label="Dates of stay" ng-disabled="booking.startShow">
+                    <md-content class="md-padding">
+                        <label>Select check-in and check-out date </label>
+                        <md-input-container class="md-block" flex-gt-sm>
+                            <label>Chek-in</label>
+                            <md-datepicker ng-model="booking.order.dateSt"></md-datepicker>
+                        </md-input-container>
+                        <md-input-container class="md-block" flex-gt-xs>
+                            <label>Chek-out</label>
+                            <md-datepicker ng-model="booking.order.dateEnd"></md-datepicker>
+                        </md-input-container>
+                        <div>
+                            <md-button ng-click="booking.find()">Find rooms</md-button>
+                        </div>
+                    </md-content>
+                </md-tab>
+                <md-tab label="Room" ng-disabled="booking.roomShow">
+                    <div ng-include="'views/template/roomSlider.tpl.html'"></div>
+                </md-tab>
+                <md-tab label="Resident" ng-disabled="booking.bookingShow">
+                    <div ng-include="'views/template/residentCard.tpl.html'"></div>
+                </md-tab>
+
+            </md-tabs>
+        </md-content>
+    </div>
+</div>
+

@@ -1,0 +1,324 @@
+<div ng-controller="GuestController" layout="column" ng-cloak class="md-inline-form">
+    <div ng-cloak>
+        <md-content>
+            <md-tabs md-dynamic-height md-border-bottom md-selected="selectedIndex">
+                <md-tab label="List guest" ng-disabled="startShow">
+                    <md-content class="md-padding">
+                        <input type="text" class="form-control" placeholder="Search any words" ng-model="searchName">
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <td>
+                                    <a href="" ng-click="sortType = 'id'; sortReverse = !sortReverse">
+                                        №
+                                        <span ng-show="sortType == 'id' && !sortReverse"
+                                              class="fa fa-caret-down"></span>
+                                        <span ng-show="sortType == 'id' && sortReverse" class="fa fa-caret-up"></span>
+                                    </a>
+                                </td>
+                                <td>
+                                    <a href="" ng-click="sortType = 'name'; sortReverse = !sortReverse">
+                                        Name
+                                        <span ng-show="sortType == 'name' && !sortReverse"
+                                              class="fa fa-caret-down"></span>
+                                        <span ng-show="sortType == 'name' && sortReverse"
+                                              class="fa fa-caret-up"></span>
+                                    </a>
+                                </td>
+                                <td>
+                                    <a href="" ng-click="sortType = 'surname'; sortReverse = !sortReverse">
+                                        Surname
+                                        <span ng-show="sortType == 'surname' && !sortReverse"
+                                              class="fa fa-caret-down"></span>
+                                        <span ng-show="sortType == 'surname' && sortReverse"
+                                              class="fa fa-caret-up"></span>
+                                    </a>
+                                </td>
+                                <td>
+                                    <a href="" ng-click="sortType = 'country'; sortReverse = !sortReverse">
+                                        Country
+                                        <span ng-show="sortType == 'price' && !sortReverse"
+                                              class="fa fa-caret-down"></span>
+                                        <span ng-show="sortType == 'price' && sortReverse"
+                                              class="fa fa-caret-up"></span>
+                                    </a>
+                                </td>
+                                <td>
+                                    <a href="" ng-click="sortType = 'orderStatus'; sortReverse = !sortReverse">
+                                        Document №
+                                        <span ng-show="sortType == 'orderStatus' && !sortReverse"
+                                              class="fa fa-caret-down"></span>
+                                        <span ng-show="sortType == 'orderStatus' && sortReverse"
+                                              class="fa fa-caret-up"></span>
+                                    </a>
+                                </td>
+                                <td>
+                                    <a href="" ng-click="sortType = 'orderStatus'; sortReverse = !sortReverse">
+                                        Email
+                                        <span ng-show="sortType == 'orderStatus' && !sortReverse"
+                                              class="fa fa-caret-down"></span>
+                                        <span ng-show="sortType == 'orderStatus' && sortReverse"
+                                              class="fa fa-caret-up"></span>
+                                    </a>
+                                </td>
+                                <td>
+                                    <a href="" ng-click="sortType = 'orderStatus'; sortReverse = !sortReverse">
+                                        Phone
+                                        <span ng-show="sortType == 'orderStatus' && !sortReverse"
+                                              class="fa fa-caret-down"></span>
+                                        <span ng-show="sortType == 'orderStatus' && sortReverse"
+                                              class="fa fa-caret-up"></span>
+                                    </a>
+                                </td>
+
+                                <td>
+                                    <a href="" ng-click="sortType = 'orderStatus'; sortReverse = !sortReverse">
+                                        Billing , $
+                                        <span ng-show="sortType == 'orderStatus' && !sortReverse"
+                                              class="fa fa-caret-down"></span>
+                                        <span ng-show="sortType == 'orderStatus' && sortReverse"
+                                              class="fa fa-caret-up"></span>
+                                    </a>
+                                </td>
+                                <td>
+                                    Action
+                                </td>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="guest in guests | orderBy:sortType:sortReverse | filter:searchName | startFrom: startingItem() | limitTo: itemsPerPage">
+                                <td>{{guest.id}}</td>
+                                <td>{{guest.name}}</td>
+                                <td>{{guest.surname}}</td>
+                                <td>{{guest.country.name}}</td>
+                                <td>{{guest.document.name}}:{{guest.docNumber}}</td>
+                                <td>{{guest.email}}</td>
+                                <td>{{guest.phone}}</td>
+                                <td>{{guest.amount}}</td>
+                                <td>
+                                    <ul class="button-group radius">
+                                        <li>
+                                            <button class="tiny radius" ng-click="selectGuest(guest)">Select</button>
+                                        </li>
+                                    </ul>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+
+                        <div id="pagination" class="row" align="center">
+                            <button class="pull-left btn btn-primary btn-sm" ng-disabled="firstPage()"
+                                    ng-click="pageBack()">Previos
+                            </button>
+                            <span align="center">{{currentPage+1}} from {{numberOfPages()}}</span>
+                            <button class="pull-right  btn btn-primary btn-sm" ng-disabled="lastPage()"
+                                    ng-click="pageForward()">Next
+                            </button>
+                        </div>
+                    </md-content>
+                </md-tab>
+                <md-tab label="Guest info" ng-disabled="cardShow">
+
+                    <div layout="row" layout-align="start" layout-margin flex="800">
+                        <div layout="row">
+                            <md-content>
+                                <md-switch ng-model="isEdit" label="Edit">
+                                    Edit
+                                </md-switch>
+                            </md-content>
+                        </div>
+
+                        <table>
+                            <tbody>
+                            <tr>
+                                <td>
+                                    <md-content>
+                                        <img src="img/passport.jpg">
+                                        <br>
+                                        <md-icon md-svg-src="img/icons/ic_photo_24px.svg"></md-icon>
+                                        <md-button type="submit" ng-click="">Upload foto</md-button>
+                                    </md-content>
+                                </td>
+                                <td>
+
+                                    <md-content>
+
+                                        <md-input-container class="md-block" flex="100">
+                                            <label>Name</label>
+                                            <input ng-model="guest.name" ng-disabled="isEdit">
+                                        </md-input-container>
+
+                                        <md-input-container class="md-block" flex="100">
+                                            <label>Last name</label>
+                                            <input ng-model="guest.surname" ng-disabled="isEdit">
+                                        </md-input-container>
+
+
+                                        <div class="row">
+                                            <md-input-container class="md-block" flex="100">
+                                                <label>Document type</label>
+                                                <input ng-model="guest.document.name" disabled>
+                                            </md-input-container>
+                                        </div>
+
+                                        <md-input-container class="md-block" flex="100">
+                                            <label>Document number</label>
+                                            <input ng-model="guest.docNumber" ng-disabled="isEdit">
+                                        </md-input-container>
+
+
+                                        <div class="row">
+                                            <md-input-container class="md-block" flex="100">
+                                                <label>Country</label>
+                                                <input ng-model="guest.country.name" disabled>
+                                            </md-input-container>
+                                        </div>
+
+                                        <md-input-container flex="100">
+                                            <label>Phone</label>
+                                            <md-icon md-svg-src="img/icons/ic_phone_24px.svg"></md-icon>
+                                            <input ng-model="guest.phone" type="text" placeholder="Phone Number"
+                                                   ng-disabled="isEdit">
+                                        </md-input-container>
+
+                                        <md-input-container flex="100">
+                                            <label>Email</label>
+                                            <md-icon md-svg-src="img/icons/ic_email_24px.svg" class="email"></md-icon>
+                                            <input ng-model="guest.email" type="email" placeholder="Email (required)"
+                                                   ng-required="true" ng-disabled="isEdit">
+                                        </md-input-container>
+                                        <md-input-container flex="100">
+                                            <label>Guest billing</label>
+                                            <md-icon md-svg-src="img/icons/ic_euro_24px.svg"></md-icon>
+                                            <input ng-model="guest.amount" ng-disabled="isEdit">
+                                        </md-input-container>
+
+                                        <div class="row">
+                                            <md-button type="submit" ng-click="saveGuest()" ng-disabled="isEdit">Save Guest</md-button>
+                                            <md-button type="submit" ng-click="historyGuest()">History</md-button>
+                                        </div>
+                                    </md-content>
+                                </td>
+                                <td ng-if="histShow == true">
+                                    <md-content>
+                                        <div layout-gt-sm="row">
+                                            <table class="table table-striped">
+                                                <thead>
+                                                <tr>
+                                                    <td> №</td>
+                                                    <td> Date: check-in / check-out</td>
+                                                    <td> Cost, $</td>
+                                                    <td> Status</td>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr ng-repeat="s in histories">
+                                                    <td>{{s.id}}</td>
+                                                    <td> {{s.dateSt}} / {{s.dateEnd}}</td>
+                                                    <td> {{s.price}}, $</td>
+                                                    <td> {{s.orderStatus}}</td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+
+                                    </md-content>
+
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </md-tab>
+                <md-tab label="Create guest" ng-disabled="newShow">
+
+                    <div layout="row" layout-align="start" layout-margin flex="800">
+                        <table>
+                            <tbody>
+                            <tr>
+                                <td>
+                                    <md-content>
+                                        <img src="img/passport.jpg">
+                                        <br>
+                                        <md-icon md-svg-src="img/icons/ic_photo_24px.svg"></md-icon>
+                                        <md-button type="submit" ng-click="">Upload foto</md-button>
+                                    </md-content>
+                                </td>
+                                <td>
+                                    <form name="userForm" ng-submit="createGuest()">
+                                    <md-content>
+
+                                        <md-input-container class="md-block" flex="100">
+                                            <label>Name</label>
+                                            <input ng-model="guestNew.name" ng-required="true">
+                                        </md-input-container>
+
+                                        <md-input-container class="md-block" flex="100">
+                                            <label>Last name</label>
+                                            <input ng-model="guestNew.surname" ng-required="true">
+                                        </md-input-container>
+
+                                        <md-input-container class="md-block" flex="100">
+                                            <label>Type document</label>
+                                            <md-select ng-model="guestNew.document" ng-required="true">
+                                                <md-option ng-value="ss" ng-repeat="ss in documents">
+                                                    {{ss.name}}
+                                                </md-option>
+                                            </md-select>
+                                        </md-input-container>
+
+
+                                        <md-input-container class="md-block" flex="100">
+                                            <label>Document number</label>
+                                            <input ng-model="guestNew.docNumber" ng-required="true">
+                                        </md-input-container>
+
+                                        <md-input-container class="md-block" flex="100">
+                                            <label>Country</label>
+                                            <md-select ng-model="guestNew.country" ng-required="true">
+                                                <md-option ng-value="ss" ng-repeat="ss in countries">
+                                                    {{ss.name}}
+                                                </md-option>
+                                            </md-select>
+                                        </md-input-container>
+
+
+                                        <md-input-container flex="100">
+                                            <label>Phone</label>
+                                            <md-icon md-svg-src="img/icons/ic_phone_24px.svg"></md-icon>
+                                            <input ng-model="guestNew.phone" type="text" placeholder="Phone Number"
+                                                   placeholder="Phone (required)" ng-required="true">
+                                        </md-input-container>
+
+                                        <md-input-container flex="100">
+                                            <label>Email</label>
+                                            <md-icon md-svg-src="img/icons/ic_email_24px.svg" class="email"></md-icon>
+                                            <input ng-model="guestNew.email" type="email" placeholder="Email (required)"
+                                                   ng-required="true">
+                                        </md-input-container>
+                                        <md-input-container flex="100">
+                                            <label>Guest billing</label>
+                                            <md-icon md-svg-src="img/icons/ic_euro_24px.svg"></md-icon>
+                                            <input ng-model="guestNew.amount" placeholder="Amount (required)"
+                                                   ng-required="true">
+                                        </md-input-container>
+
+                                        <div class="row">
+                                            <md-button type="submit">Save Guest</md-button>
+
+                                        </div>
+                                    </md-content>
+                                    </form>
+                                </td>
+
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </md-tab>
+            </md-tabs>
+        </md-content>
+    </div>
+</div>

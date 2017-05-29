@@ -1,0 +1,342 @@
+<table>
+    <tbody>
+    <tr>
+        <td>
+            <md-content layout-padding>
+                <div>
+
+                    <div layout-gt-xs="row">
+                        <md-input-container class="md-block" flex-gt-sm>
+                            <label>Order №</label>
+                            <input ng-model="order.id" disabled>
+                        </md-input-container>
+
+                    </div>
+                    <div layout-gt-sm="row">
+                        <md-input-container>
+                            <label>{{order.dateSt|date}}</label>
+                            <md-datepicker ng-model="order.dateSt" disabled></md-datepicker>
+                        </md-input-container>
+                        <md-input-container>
+                            <label>{{order.dateEnd|date}}</label>
+                            <md-datepicker ng-model="order.dateEnd" disabled></md-datepicker>
+                        </md-input-container>
+                    </div>
+                    <div layout-gt-sm="row">
+                        <md-button ng-click="guestInfo()" class="md-fab md-primary md-hue-2"
+                                   aria-label="Profile">
+                            <md-icon md-svg-src="img/icons/ic_people_24px.svg"></md-icon>
+                        </md-button>
+                        <md-input-container class="md-block" flex-gt-sm>
+                            <label>Name</label>
+                            <input ng-model="guest.name" disabled>
+                        </md-input-container>
+                        <md-input-container class="md-block" flex-gt-sm>
+                            <label>Surname</label>
+                            <input ng-model="guest.surname" disabled>
+                        </md-input-container>
+                    </div>
+                    <div layout-gt-sm="row">
+                        <md-button ng-click="roomInfo()" class="md-fab md-primary md-hue-2"
+                                   aria-label="Profile">
+                            <md-icon md-svg-src="img/icons/ic_home_black_24px.svg"></md-icon>
+                        </md-button>
+                        <md-input-container class="md-block" flex-gt-sm>
+                            <label>Room number</label>
+                            <input ng-model="room.number" disabled>
+                        </md-input-container>
+                        <md-input-container class="md-block" flex-gt-sm>
+                            <label>Price for night</label>
+                            <input ng-model="room.price" disabled>
+                        </md-input-container>
+                    </div>
+                    <div layout-gt-sm="row">
+                        <md-button ng-click='paymentInfo()' class="md-fab md-primary md-hue-2"
+                                   aria-label="Profile">
+                            <md-icon
+                                    md-svg-src="img/icons/ic_attach_money_black_24px.svg"></md-icon>
+                        </md-button>
+                        <md-input-container class="md-icon-float md-icon-right md-block">
+                            <label>Current summ</label>
+                            <input ng-model="order.price" disabled>
+                        </md-input-container>
+                        <md-button ng-click='roomServiceInfo()' class="md-fab md-primary md-hue-2"
+                                   aria-label="Profile">
+                            <md-icon
+                                    md-svg-src="img/icons/ic_room_service_black_24px.svg"></md-icon>
+                        </md-button>
+                        <md-input-container class="md-icon-float md-icon-right md-block">
+                            <label>Room service</label>
+                            <input disabled>
+                        </md-input-container>
+
+                    </div>
+                    <div layout-gt-sm="row">
+
+                        <md-button class="md-fab md-primary md-hue-2"
+                                   aria-label="Profile">
+                            <md-icon md-svg-src="img/icons/ic_close_black_24px.svg"></md-icon>
+                        </md-button>
+                        <md-input-container class="md-icon-float md-icon-right md-block">
+                            <label>Change status</label>
+                            <input ng-model="order.orderStatus" disabled>
+                        </md-input-container>
+                    </div>
+                    <div layout-gt-sm="row">
+                        <md-button ng-click='closeOrder()' class="md-raised md-primary" ng-disabled="isCanClose">Close
+                            Order
+                        </md-button>
+                    </div>
+                </div>
+            </md-content>
+        </td>
+        <td>
+            <md-content layout-padding>
+                <div layout-gt-sm="row">
+                    <div class="animate-switch-container" ng-switch on="selection">
+                        <div class="animate-switch" ng-switch-when="pay">
+                            <md-content>
+                                <br>
+
+                                <div layout-gt-sm="row">
+                                    <table class="table table-striped">
+                                        <thead>
+                                        <tr>
+                                            <td> Name</td>
+                                            <td> Summa</td>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr ng-repeat="sp in spends">
+                                            <td> {{sp.name}}</td>
+                                            <td> {{sp.sum}},$</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div layout-gt-sm="row" style="border-bottom: 1px solid black">
+                                    {{summaSpend}}, $
+                                </div>
+                                <label>Need to payed:</label>
+                                <br>
+
+                                <div layout-gt-sm="row">
+                                    <table class="table table-striped">
+                                        <thead>
+                                        <tr>
+                                            <td> Payments №</td>
+                                            <td> Date</td>
+                                            <td> Payment type</td>
+                                            <td> Summa</td>
+                                            <td> Notes</td>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr ng-repeat="pp in payments">
+                                            <td>{{pp.id}}</td>
+                                            <td>{{pp.datePayment}}</td>
+                                            <td>{{pp.paymentType}}</td>
+                                            <td>{{pp.summ}},$</td>
+                                            <td>{{pp.comments}}</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div layout-gt-sm="row" style="border-bottom: 1px solid black">
+                                    {{summaPayed}}, $
+                                </div>
+                                <label>Already payed:</label>
+
+                                <div layout-gt-sm="row">
+
+                                    <md-input-container
+                                            class="md-icon-float md-icon-right md-block">
+                                        <label>Need to pay:{{summNeed}}, $</label>
+                                        <input ng-model="paymentExport.summ" type="number" ng-max="summNeed">
+                                    </md-input-container>
+                                    <md-input-container>
+                                        <select class="form-control" ng-model="paymentExport.paymentType"
+                                                ng-options="tp for tp in typeP">{{tp}}</select>
+                                    </md-input-container>
+                                </div>
+
+                                <div layout-gt-sm="row">
+                                    <md-button ng-click="addMoney()" md-no-ink class="md-primary">
+                                        Add money
+                                    </md-button>
+                                    <md-button ng-click="reloadSum()" md-no-ink class="md-primary">
+                                        Reload money
+                                    </md-button>
+                                    <md-button ng-click="" md-no-ink class="md-primary">
+                                        Print check
+                                    </md-button>
+                                </div>
+                            </md-content>
+
+                        </div>
+                        <div class="animate-switch" ng-switch-when="guest">
+                            <md-content>
+
+                                <md-input-container class="md-block" flex="100">
+                                    <label>Name</label>
+                                    <input ng-model="guest.name" disabled>
+                                </md-input-container>
+
+                                <md-input-container class="md-block" flex="100">
+                                    <label>Last name</label>
+                                    <input ng-model="guest.surname" disabled>
+                                </md-input-container>
+
+
+                                <div class="row">
+                                    <md-input-container class="md-block" flex="100">
+                                        <label>Document type</label>
+                                        <input ng-model="guest.document.name" disabled>
+                                    </md-input-container>
+                                </div>
+
+                                <md-input-container class="md-block" flex="100">
+                                    <label>Document number</label>
+                                    <input ng-model="guest.docNumber" disabled>
+                                </md-input-container>
+
+
+                                <div class="row">
+                                    <md-input-container class="md-block" flex="100">
+                                        <label>Country</label>
+                                        <input ng-model="guest.country.name" disabled>
+                                    </md-input-container>
+                                </div>
+
+                                <md-input-container flex="100">
+                                    <label>Phone</label>
+                                    <md-icon md-svg-src="img/icons/ic_phone_24px.svg"></md-icon>
+                                    <input ng-model="guest.phone" type="text"
+                                           placeholder="Phone Number" disabled>
+                                </md-input-container>
+
+                                <md-input-container flex="100">
+                                    <label>Email</label>
+                                    <md-icon md-svg-src="img/icons/ic_email_24px.svg"
+                                             class="email"></md-icon>
+                                    <input ng-model="guest.email" type="email"
+                                           placeholder="Email (required)" disabled>
+                                </md-input-container>
+                                <md-input-container flex="100">
+                                    <label>Guest billing</label>
+                                    <md-icon
+                                            md-svg-src="img/icons/ic_attach_money_black_24px.svg"></md-icon>
+                                    <input ng-model="guest.amount" disabled>
+                                </md-input-container>
+
+                                <div class="row" flex="500">
+                                    <md-input-container flex="150">
+                                        <label>Discount 5%, $</label>
+                                        <md-icon md-svg-src="img/icons/ic_card_giftcard_24px.svg"></md-icon>
+                                        <input ng-model="config.discountLevelFive" disabled>
+                                    </md-input-container>
+
+                                    <md-input-container flex="150">
+                                        <label>Discount 10%, $</label>
+                                        <md-icon md-svg-src="img/icons/ic_card_giftcard_24px.svg"></md-icon>
+                                        <input ng-model="config.discountLevelTen" disabled>
+                                    </md-input-container>
+                                </div>
+                            </md-content>
+
+                        </div>
+                        <div class="animate-switch" ng-switch-when="room">
+                            <md-content>
+                                <div layout-gt-sm="row">
+                                    <md-input-container class="md-block" flex="100">
+                                        <label>Room number</label>
+                                        <input ng-model="room.number" disabled>
+                                    </md-input-container>
+
+                                    <md-input-container flex="100">
+                                        <label>Room price</label>
+                                        <md-icon
+                                                md-svg-src="img/icons/ic_attach_money_black_24px.svg"></md-icon>
+                                        <input ng-model="room.price" disabled>
+                                    </md-input-container>
+                                </div>
+                                <div layout-gt-sm="row">
+                                    <md-switch ng-model="isRoomChange" aria-label="room change">
+                                    </md-switch>
+                                </div>
+                                <div ng-if="isRoomChange==true">
+                                    <md-input-container>
+                                        <label>Date to Find</label>
+                                        <md-datepicker ng-model="dateFind"></md-datepicker>
+                                    </md-input-container>
+                                    <br>
+
+                                    <div class="row">
+
+                                        <md-select ng-model="change.room">
+                                            <md-option ng-value="ss" ng-repeat="ss in rooms">
+                                                {{ss.number}} with price {{ss.price}}
+                                            </md-option>
+                                        </md-select>
+                                    </div>
+
+
+                                    <md-button ng-click="changeRoom()" md-no-ink class="md-primary">
+                                        Change Room
+                                    </md-button>
+                                </div>
+
+                            </md-content>
+
+                        </div>
+                        <div class="animate-switch" ng-switch-when="roomService">
+                            <md-content>
+                                <div layout-gt-sm="row">
+                                    <table class="table table-striped">
+                                        <thead>
+                                        <tr>
+                                            <td> Sevice name</td>
+                                            <td> Count</td>
+                                            <td> Cost in moment</td>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr ng-repeat="s in roomServices">
+                                            <td>{{s.serviceName}}</td>
+                                            <td> {{s.count}}</td>
+                                            <td> {{s.sum}}, $</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="row">
+
+                                    <md-select ng-model="change.service">
+                                        <md-option ng-value="ss" ng-repeat="ss in listServices">
+                                            {{ss.sName}}( {{ss.description}} ) with price
+                                            {{ss.sPrice}}
+                                        </md-option>
+                                    </md-select>
+                                </div>
+
+                                <md-input-container flex="100">
+                                    <label>Count, pc</label>
+                                    <input ng-model="change.service.count" type="number">
+                                </md-input-container>
+                                <div layout-gt-sm="row">
+                                    <md-button ng-click="addService()" md-no-ink class="md-primary">
+                                        Add room service
+                                    </md-button>
+                                </div>
+                            </md-content>
+
+                        </div>
+
+                    </div>
+
+                </div>
+            </md-content>
+        </td>
+    </tr>
+    </tbody>
+</table>

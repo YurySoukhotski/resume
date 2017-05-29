@@ -1,0 +1,234 @@
+<md-content>
+    <div layout="row" layout-padding layout-wrap layout-fill style="padding-bottom: 32px;" ng-cloak>
+        <div class="padded" md-whiteframe="1" layout layout-align="center center">
+            <span><p class="md-body-3">Date chek-in:
+                <small class="md-caption"> {{booking.order.dateSt |date}}</small>
+            </p></span>
+        </div>
+        <div class="padded" md-whiteframe="2" layout layout-align="center center">
+            <span><p class="md-body-3"> Date chek-out:
+                <small class="md-caption"> {{booking.order.dateEnd| date}}</small>
+                .
+            </p></span>
+        </div>
+        <div class="padded" md-whiteframe="3" layout layout-align="center center">
+            <span><p class="md-body-3"> Room selected №:
+                <small class="md-caption">{{booking.room.number}}</small>
+                .
+            </p></span>
+        </div>
+        <div class="padded" md-whiteframe="3" layout layout-align="center center">
+            <span><p class="md-body-3"> Price for night, $
+                <small class="md-caption">{{booking.room.price}}</small>
+                .
+            </p></span>
+        </div>
+        <div class="padded" md-whiteframe="3" layout layout-align="center center">
+            <span><p class="md-body-3"> Estimated cost of living, $
+                <small class="md-caption">{{booking.cost}}</small>
+                .
+            </p></span>
+        </div>
+        <div class="padded" md-whiteframe="3" layout layout-align="center center">
+            <span><p class="md-body-3"> Guest:
+                <small class="md-caption">
+                    {{booking.guest.name}}.{{booking.guest.surname}}|{{booking.guest.phone}}/{{booking.guest.email}}
+                </small>
+                .
+            </p></span>
+        </div>
+    </div>
+</md-content>
+<div layout="row">
+    <md-content>
+        <md-switch ng-model="booking.searchGuestShow" label=" New Guest / Search guest">
+            New Guest / Search guest
+        </md-switch>
+    </md-content>
+</div>
+<div ng-if="booking.searchGuestShow == true">
+    <md-content class="md-padding">
+        <div class="form-group">
+            <label>Search guest from base (showing last 4 guests)</label>
+
+            <div class="input-group">
+                <div class="input-group-addon"><i class="fa fa-search"></i></div>
+                <input type="text" class="form-control" placeholder="Search"
+                       ng-model="booking.searchName">
+            </div>
+        </div>
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Surname</th>
+                    <th>Country</th>
+                    <th>Document type</th>
+                    <th>Document number</th>
+                    <th>Phone</th>
+                    <th>Email</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="person in booking.guests | filter: booking.searchName | limitTo: 4">
+                    <td>{{ person.name }}</td>
+                    <td>{{ person.surname }}</td>
+                    <td>{{ person.country.name }}</td>
+                    <td>{{ person.document.name }}</td>
+                    <td>{{ person.docNumber}}</td>
+                    <td>{{ person.phone }}</td>
+                    <td>{{ person.email }}</td>
+                    <td>
+                        <md-button type="submit" ng-click="booking.selectGuest(person)">Select
+                        </md-button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </md-content>
+</div>
+<div layout="row" layout-align="start" layout-margin flex="800">
+    <table>
+        <tbody>
+        <tr>
+            <td>
+                <md-content>
+                    <img src="img/passport.jpg">
+                    <br>
+                    <md-icon md-svg-src="img/icons/ic_photo_24px.svg"></md-icon>
+                    <md-button type="submit" ng-click="">Upload foto</md-button>
+                </md-content>
+            </td>
+            <td>
+                <div ng-if="booking.searchGuestShow == true">
+                    <md-content>
+
+                        <md-input-container class="md-block" flex="100">
+                            <label>Name</label>
+                            <input ng-model="booking.guest.name" ng-disabled="booking.searchGuestShow">
+                        </md-input-container>
+
+                        <md-input-container class="md-block" flex="100">
+                            <label>Last name</label>
+                            <input ng-model="booking.guest.surname" ng-disabled="booking.searchGuestShow">
+                        </md-input-container>
+
+
+                        <div class="row">
+                            <md-input-container class="md-block" flex="100">
+                                <label>Document type</label>
+                                <input ng-model="booking.guest.document.name" ng-disabled="booking.searchGuestShow">
+                            </md-input-container>
+                        </div>
+
+                        <md-input-container class="md-block" flex="100">
+                            <label>Document number</label>
+                            <input ng-model="booking.guest.docNumber" ng-disabled="booking.searchGuestShow">
+                        </md-input-container>
+
+
+                        <div class="row">
+                            <md-input-container class="md-block" flex="100">
+                                <label>Country</label>
+                                <input ng-model="booking.guest.country.name" ng-disabled="booking.searchGuestShow">
+                            </md-input-container>
+                        </div>
+
+                        <md-input-container flex="100">
+                            <label>Phone</label>
+                            <md-icon md-svg-src="img/icons/ic_phone_24px.svg"></md-icon>
+                            <input ng-model="booking.guest.phone" type="text" placeholder="Phone Number"
+                                   ng-disabled="booking.searchGuestShow">
+                        </md-input-container>
+
+                        <md-input-container flex="100">
+                            <label>Email</label>
+                            <md-icon md-svg-src="img/icons/ic_email_24px.svg" class="email"></md-icon>
+                            <input ng-model="booking.guest.email" type="email" placeholder="Email (required)"
+                                   ng-required="true" ng-disabled="booking.searchGuestShow">
+                        </md-input-container>
+                        <md-input-container flex="100">
+                            <label>Guest billing</label>
+                            <md-icon md-svg-src="img/icons/ic_euro_24px.svg"></md-icon>
+                            <input ng-model="booking.guest.amount" ng-disabled="booking.searchGuestShow">
+                        </md-input-container>
+
+                        <div class="row">
+                            <md-button type="submit" ng-click="booking.saveOrder()" ng-disabled="booking.isDisabled">
+                                Save Order
+                            </md-button>
+
+                        </div>
+                    </md-content>
+                </div>
+
+                <div ng-if="booking.searchGuestShow == false">
+                    <md-content>
+
+                        <md-input-container class="md-block" flex="100">
+                            <label>Name</label>
+                            <input ng-model="booking.guest.name">
+                        </md-input-container>
+
+                        <md-input-container class="md-block" flex="100">
+                            <label>Last name</label>
+                            <input ng-model="booking.guest.surname">
+                        </md-input-container>
+                        <md-input-container class="md-block" flex="100">
+                            <label>Type document</label>
+                            <md-select ng-model="booking.guest.document">
+                                <md-option ng-value="ss" ng-repeat="ss in booking.documents">
+                                    {{ss.name}}
+                                </md-option>
+                            </md-select>
+                        </md-input-container>
+                        <md-input-container class="md-block" flex="100">
+                            <label>Document number</label>
+                            <input ng-model="booking.guest.docNumber">
+                        </md-input-container>
+                        <md-input-container class="md-block" flex="100">
+                            <label>Country</label>
+                            <md-select ng-model="booking.guest.country">
+                                <md-option ng-value="ss" ng-repeat="ss in booking.countries">
+                                    {{ss.name}}
+                                </md-option>
+                            </md-select>
+                        </md-input-container>
+
+                        <md-input-container flex="100">
+                            <label>Phone</label>
+                            <md-icon md-svg-src="img/icons/ic_phone_24px.svg"></md-icon>
+                            <input ng-model="booking.guest.phone" type="text" placeholder="Phone Number">
+                        </md-input-container>
+
+                        <md-input-container flex="100">
+                            <label>Email</label>
+                            <md-icon md-svg-src="img/icons/ic_email_24px.svg" class="email"></md-icon>
+                            <input ng-model="booking.guest.email" type="email" placeholder="Email (required)"
+                                   ng-required="true">
+                        </md-input-container>
+
+                        <md-input-container flex="100">
+                            <label>Guest billing</label>
+                            <md-icon md-svg-src="img/icons/ic_euro_24px.svg"></md-icon>
+                            <input ng-model="booking.guest.amount">
+                        </md-input-container>
+
+                        <div class="row">
+
+                            <md-button type="submit" ng-click="booking.saveGuest()"
+                                       ng-disabled="booking.searchGuestShow">Save Guest
+                            </md-button>
+                        </div>
+                    </md-content>
+                </div>
+
+
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>

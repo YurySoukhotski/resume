@@ -1,0 +1,364 @@
+#content {
+    max-width: 200px;
+    margin: 20px auto 0 auto;
+}
+#pagination {
+    text-align: center;
+}
+
+.table-borderless td,
+.table-borderless th {
+    border: 1;
+}
+
+form {
+    max-width: 500px;
+    margin: 0 auto;
+    padding-top: 20px;
+}
+form button.small {
+    padding: 8px 17px;
+}
+#phonebook {
+    margin: 0 auto;
+}
+#phonebook button.tiny {
+    margin-bottom: 0;
+    padding: 5px 10px;
+}
+.badgebox
+{
+    opacity: 0;
+}
+
+.badgebox + .badge
+{
+    /* Move the check mark away when unchecked */
+    text-indent: -999999px;
+    /* Makes the badge's width stay the same checked and unchecked */
+    width: 20px;
+}
+
+.badgebox:focus + .badge
+{
+    /* Set something to make the badge looks focused */
+    /* This really depends on the application, in my case it was: */
+    
+    /* Adding a light border */
+    box-shadow: inset 0px 0px 3px;
+    /* Taking the difference out of the padding */
+}
+
+.badgebox:checked + .badge
+{
+    /* Move the check mark back when checked */
+    text-indent: 0;
+}
+
+.full button span {
+    background-color: limegreen;
+    border-radius: 27px;
+    color: black;
+  }
+.partially button span {
+    background-color: orange;
+    border-radius: 27px;
+    color: black;
+  }
+
+
+/**********************/
+
+/*---------------------------------------------------------------- Scheduler */
+.scheduler {
+    display: block;
+    background: #fff;
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+}
+
+.scheduler::after {
+    content: "";
+    display: block;
+    clear: both;
+}
+
+.scheduler .labels, .scheduler .schedule-area-container {
+    display: block;
+    float: left;
+}
+
+.scheduler .labels {
+    width: 15%;
+    color: #666;
+    border-right: 1px solid #ddd;
+}
+
+.scheduler .labels .srow {
+    padding: 0 5px;
+    border-bottom: 1px solid #ddd;
+}
+
+.scheduler .schedule-area-container {
+    overflow-x: scroll;
+    width: 85%;
+}
+
+.scheduler .srow {
+    position: relative;
+    height: 35px;
+    line-height: 35px;
+}
+
+.scheduler .timestamps {
+    color: #aaa;
+    position: relative;
+}
+
+.scheduler .timestamps .grid-container div {
+    border-right: 1px solid #eee;
+}
+
+.scheduler .timestamps .grid-container div:last-child {
+    border-right: none;
+}
+
+/*------------------------------------------------------------- Multi-slider */
+multi-slider {
+    position: relative;
+    display: block;
+    height: 35px;
+    overflow: hidden;
+}
+
+multi-slider .slot {
+    position: absolute;
+    top: 5px;
+    bottom: 5px;
+    border-radius: 3px;
+    text-align: center;
+    white-space: nowrap;
+    line-height: 25px;
+    color: #fff;
+}
+
+multi-slider .ghost {
+    background: #5ab57a;
+    opacity: 0.6;
+    display: none;
+    cursor: pointer;
+}
+
+multi-slider:hover .ghost {
+    display: block;
+}
+
+multi-slider.slot-hover .ghost {
+    display: none;
+}
+
+multi-slider.dragging .ghost {
+    display: none;
+}
+
+multi-slider weekly-slot {
+    -webkit-transition: background 0.1s ease-in;
+    cursor: all-scroll;
+    min-width: 10px !important;
+    background: #4eb8d5;
+}
+
+multi-slider weekly-slot.disable {
+    cursor: not-allowed;
+    color: #666;
+    background: #c0c0c0;
+}
+
+multi-slider weekly-slot .handle {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+}
+
+multi-slider weekly-slot .handle.left, multi-slider weekly-slot .handle.right {
+    width: 10px;
+    background: #000;
+    cursor: col-resize;
+    opacity: 0.1;
+}
+
+multi-slider weekly-slot.disable .handle {
+    cursor: not-allowed;
+}
+
+multi-slider weekly-slot .handle.left:hover, multi-slider weekly-slot .handle.right:hover {
+    opacity: 0.3;
+}
+
+multi-slider weekly-slot .handle.left {
+    left: 0;
+}
+
+multi-slider weekly-slot .handle.right {
+    right: 0;
+}
+
+multi-slider weekly-slot:not(.disable) .remove {
+    display: none;
+    cursor: pointer;
+    float: right;
+    margin-right: -30px;
+    width: 25px;
+    background: red;
+    border-radius: 20%;
+    opacity: 0.5;
+    transform: translateY(-100%);
+}
+
+multi-slider weekly-slot:not(.disable) .remove:before {
+    position: absolute;
+    content: "";
+    left: -5px;
+    width: 10px;
+    height: 25px;
+}
+
+multi-slider weekly-slot:hover .remove {
+    display: block;
+}
+
+multi-slider weekly-slot .remove:hover {
+    opacity: 1;
+}
+
+multi-slider weekly-slot.active {
+    z-index: 10;
+    background: #5ab57a;
+    color: #fff;
+}
+
+.grid-container {
+    width: 100%;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    border-bottom: 1px solid #ddd;
+}
+
+.grid-container div {
+    float: left;
+    height: 34px;
+    overflow: hidden;
+    text-align: center;
+}
+
+.grid-container.striped div:nth-child(even) {
+    background: #fafafa;
+}
+
+.github-fork-ribbon:after {
+    line-height: 1em;
+}
+
+/*--------------------------------------------------------------- Animations */
+.schedule-animate {
+    transition: opacity 200ms ease-out;
+}
+.schedule-animate.ng-enter, .schedule-animate.ng-hide-remove {
+    opacity: 0;
+}
+.schedule-animate.ng-leave, .schedule-animate.ng-hide-add {
+    display: none;
+    opacity: 1;
+}
+
+/******************** white frame */
+.whiteframedemoDirectiveAttributeUsage {
+    /* For breakpoint `-xs` */
+    /* For breakpoint `-sm` */
+    /* For breakpoint `-md` */
+    /* For breakpoint `-gt-md` */ }
+.whiteframedemoDirectiveAttributeUsage md-whiteframe, .whiteframedemoDirectiveAttributeUsage div.padded {
+    background: #fff;
+    margin: 30px;
+    height: 100px; }
+@media (max-width: 599px) {
+    .whiteframedemoDirectiveAttributeUsage md-whiteframe, .whiteframedemoDirectiveAttributeUsage div.padded {
+        margin: 7px;
+        height: 50px;
+        background-color: #c8e4fa; }
+    .whiteframedemoDirectiveAttributeUsage md-whiteframe > span, .whiteframedemoDirectiveAttributeUsage div.padded > span {
+        font-size: 0.4em; } }
+@media (min-width: 600px) and (max-width: 959px) {
+    .whiteframedemoDirectiveAttributeUsage md-whiteframe, .whiteframedemoDirectiveAttributeUsage div.padded {
+        margin: 20px;
+        height: 75px; }
+    .whiteframedemoDirectiveAttributeUsage md-whiteframe > span, .whiteframedemoDirectiveAttributeUsage div.padded > span {
+        font-size: 0.6em; } }
+@media (min-width: 960px) and (max-width: 1279px) {
+    .whiteframedemoDirectiveAttributeUsage md-whiteframe, .whiteframedemoDirectiveAttributeUsage div.padded {
+        margin: 20px;
+        height: 90px;
+        background-color: #fcddde; }
+    .whiteframedemoDirectiveAttributeUsage md-whiteframe > span, .whiteframedemoDirectiveAttributeUsage div.padded > span {
+        font-size: 0.9em; } }
+@media (min-width: 1280px) {
+    .whiteframedemoDirectiveAttributeUsage md-whiteframe, .whiteframedemoDirectiveAttributeUsage div.padded {
+        margin: 25px;
+        height: 100px;
+        background-color: #F2FCE2; }
+    .whiteframedemoDirectiveAttributeUsage md-whiteframe > span, .whiteframedemoDirectiveAttributeUsage div.padded > span {
+        font-size: 1.0em; } }
+
+/**/
+
+
+.tabsdemoDynamicHeight md-content {
+    background-color: transparent !important; }
+.tabsdemoDynamicHeight md-content md-tabs {
+    background: #f6f6f6;
+    border: 1px solid #e1e1e1; }
+.tabsdemoDynamicHeight md-content md-tabs md-tabs-wrapper {
+    background: white; }
+.tabsdemoDynamicHeight md-content h1:first-child {
+    margin-top: 0; }
+
+/**************/
+
+
+.bottomSheetdemoBasicUsage .md-inline-list-icon-label {
+  display: inline-block;
+  padding-left: 10px;
+  padding-right: 10px;
+  margin-top: -10px;
+  height: 24px;
+  vertical-align: middle; }
+
+.bottomSheetdemoBasicUsage .md-grid-item-content {
+  height: 90px;
+  padding-top: 10px; }
+
+.bottomSheetdemoBasicUsage .md-grid-item-content md-icon {
+  height: 48px;
+  width: 48px; }
+
+.bottomSheetdemoBasicUsage .md-grid-text {
+  padding-bottom: 5px; }
+
+.bottomSheetdemoBasicUsage md-list-item, .bottomSheetdemoBasicUsage md-list-item .md-list-item-inner {
+  min-height: 48px; }
+
+.bottomSheetdemoBasicUsage h2 {
+  line-height: 36px;
+  padding-top: 10px; }
+
+.bottomSheetdemoBasicUsage .md-subheader .md-subheader-inner {
+  padding: 0; }
+
+.bottomSheetdemoBasicUsage md-toast .md-toast-content {
+  background-color: #B14141; }
+
+.bottomSheetdemoBasicUsage md-toast > * {
+  font-weight: bolder; }
+
+

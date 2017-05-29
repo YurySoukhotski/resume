@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html ng-app="hotelApp">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <title>Hotel WEB </title>
+
+    <link rel="stylesheet" href="css/menu.css">
+    <link rel="stylesheet" href="css/popup.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/foundation.css"/>
+    <link rel="stylesheet" href="css/mystyles.css">
+    <link rel="stylesheet" href="css/angular-material.css">
+    <link rel="stylesheet" href="css/dhtmlxscheduler.css">
+
+
+</head>
+<body>
+<ul id="menu">
+    <li ng-if="isUser">
+        <a href="">Orders</a>
+        <ul>
+            <li><a ui-sref="orderlist">List orders</a></li>
+            <li><a ui-sref="booking">Booking room</a></li>
+            <li><a ui-sref="sheduller">Sheduller</a></li>
+        </ul>
+    </li>
+    <li><a ui-sref="online">Online booking</a></li>
+    <li ng-if="isUser">
+        <a ui-sref="preorder">Preorder</a></li>
+    <li ng-if="isAdmin">
+        <a href="">Catalogue</a>
+        <ul>
+            <li><a ui-sref="roomlist">Room</a></li>
+            <li><a ui-sref="servicelist">Service</a></li>
+            <li><a ui-sref="listguest">Guest</a></li>
+            <li><a ui-sref="countylist">Country</a></li>
+            <li><a ui-sref="doclist">Document</a></li>
+        </ul>
+    </li>
+    <li ng-if="isAdmin">
+        <a href="">Tools</a>
+        <ul>
+            <li><a ui-sref="manage">Manage</a></li>
+            <li><a ui-sref="stat">Statistic</a></li>
+            <li><a ui-sref="news">News</a></li>
+        </ul>
+    </li>
+    <li><a ui-sref="about">About</a></li>
+    <div ng-controller='SigninCtrl as vm'>
+        <li><a ng-click="vm.logout()" ng-if="isLoginPage">{{userName}} Logout</a></li>
+        <li><a ng-click="vm.logout()" ng-if="!isLoginPage"> Login</a></li>
+    </div>
+</ul>
+
+<div ui-view="content">
+
+</div>
+
+</body>
+<script type="text/javascript" src="js/lib/angular.js"></script>
+<script type="text/javascript" src="js/lib/angular-animate.js"></script>
+<script type="text/javascript" src="js/lib/angular-aria.js"></script>
+<script type="text/javascript" src="js/lib/angular-messages.js"></script>
+<script type="text/javascript" src="js/lib/fusioncharts.js"></script>
+<script type="text/javascript" src="js/lib/fusioncharts.charts.js"></script>
+<script type="text/javascript" src="js/lib/angular-fusioncharts.min.js"></script>
+<script type="text/javascript" src="js/lib/dhtmlxscheduler.js"></script>
+
+<script src="js/lib/angular-ui-router.js"></script>
+<script src="js/lib/angular-animate.js"></script>
+<script src="js/lib/ui-bootstrap-tpls-2.5.0.min.js"></script>
+<script src="js/lib/moment.js"></script>
+<script src="js/lib/angular-moment.js"></script>
+<script src="js/lib/angular-material.min.js"></script>
+<script src="js/main.js"></script>
+<script src="js/services/authInterceptorFactory.js"></script>
+<script src="js/app.js"></script>
+
+<!-- Filter-->
+
+<script src="js/filter/truefalse.js"></script>
+<script src="js/filter/startfrom.js"></script>
+
+<!-- Controllers-->
+
+
+<script src="js/controllers/RoomController.js"></script>
+<script src="js/controllers/GuestController.js"></script>
+<script src="js/controllers/OrderController.js"></script>
+<script src="js/controllers/ServiceController.js"></script>
+<script src="js/controllers/DocController.js"></script>
+<script src="js/controllers/CountryController.js"></script>
+<script src="js/controllers/OrderBookingController.js"></script>
+<script src="js/controllers/NewsController.js"></script>
+<script src="js/controllers/AboutCtrl.js"></script>
+<script src="js/controllers/OnlineCtrl.js"></script>
+<script src="js/controllers/ShedullerCtrl.js"></script>
+<script src="js/controllers/ManageController.js"></script>
+<script src="js/controllers/StatController.js"></script>
+<script src="js/controllers/PreorderCtrl.js"></script>
+
+<!-- Directives-->
+
+<script src="js/directives/integer.js"></script>
+<script src="js/directives/modalDialog.js"></script>
+<script src="js/directives/app.scheduler.js"></script>
+<!-- Services-->
+<script src="js/services/Config.js"></script>
+<script src="js/services/HttpMyService.js"></script>
+
+
+</html>

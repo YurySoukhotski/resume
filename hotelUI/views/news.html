@@ -1,0 +1,41 @@
+<div class="container" ng-controller="NewsController" align="center">
+    <table table-layout="fixed" width="50%"
+           ng-repeat="news in newsList | startFrom: startingItem() | limitTo: itemsPerPage" border="0">
+
+        <tbody>
+        <tr>
+            <td>
+            <span class="md-caption">
+            Publish date: {{news.date}}
+            </span>
+            </td>
+        </tr>
+        <tr>
+            <td><a href='' ng-click='showFullNews(news)'>
+            <span class="md-caption">
+            {{news.simple_name}} 
+            </span>
+            </a></td>
+        </tr>
+        <tr ng-if='news == fullNews'>
+            <td colspan="3" width="100%">
+            <span class="md-caption">
+            {{news.full_text}}
+            </span>
+            </td>
+        </tr>
+
+        </tbody>
+    </table>
+    <div id="pagination" class="row" align="center" width="50%">
+        <button class="pull-left btn btn-primary btn-sm" ng-disabled="firstPage()" ng-click="pageBack()">Previos
+        </button>
+        <span align="center">{{currentPage+1}} from {{numberOfPages()}}</span>
+        <button class="pull-right  btn btn-primary btn-sm" ng-disabled="lastPage()" ng-click="pageForward()">Next
+        </button>
+    </div>
+
+
+</div>
+
+

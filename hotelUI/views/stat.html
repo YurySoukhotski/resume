@@ -1,0 +1,33 @@
+<div ng-controller="StatCtrl">
+    <div align="center">
+        <fusioncharts
+                width="600"
+                height="300"
+                type="column3d"
+                datasource="{{myMoneyData}}"
+        ></fusioncharts>
+
+        <fusioncharts
+                width="600"
+                height="300"
+                type="column3d"
+                datasource="{{myGuestData}}"
+        ></fusioncharts>
+
+        <fusioncharts
+                width="600"
+                height="300"
+                type="column3d"
+                datasource="{{myGuestSpent}}"
+        ></fusioncharts>
+
+        <fusioncharts
+                width="600"
+                height="300"
+                type="column2d"
+                datasource="{{myAvgData}}"
+        ></fusioncharts>
+    </div>
+</div>
+
+

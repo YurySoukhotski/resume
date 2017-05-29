@@ -1,0 +1,30 @@
+#getSection {
+  background-color: #ffeeee;
+  padding-bottom: 10px;
+}
+
+#postSection {
+  background-color: #eeffee;
+  padding-bottom: 10px;
+}
+
+#getSection pre, #postSection pre {
+  margin: 10px 10px 10px 100px;
+  padding: 10px;
+  background-color: #fefefe;
+}
+form {
+  max-width: 500px;
+  margin: 0 auto;
+  padding-top: 20px;
+}
+form button.small {
+  padding: 8px 17px;
+}
+#phonebook {
+  margin: 0 auto;
+}
+#phonebook button.tiny {
+  margin-bottom: 0;
+  padding: 5px 10px;
+}

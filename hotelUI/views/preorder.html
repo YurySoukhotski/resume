@@ -1,0 +1,192 @@
+<div ng-controller="PreorderCtrl" layout="column" ng-cloak class="md-inline-form">
+    <div ng-cloak>
+        <md-content>
+            <md-tabs md-dynamic-height md-border-bottom md-selected="selectedIndex">
+                <md-tab label="List online orders" ng-disabled="startShow">
+                    <md-content class="md-padding">
+                        <table  class="table table-striped">
+                            <thead>
+                            <td>Name</td>
+                            <td>Surname</td>
+                            <td>Email</td>
+                            <td>Phone</td>
+                            <td>Check in date</td>
+                            <td>Check out date</td>
+                            <td>Info</td>
+                            <td>Action</td>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="pr in preorders  | startFrom: startingItem() | limitTo: itemsPerPage">
+                                <td>{{pr.nameGuest}} </td>
+                                <td>{{pr.surnameGuest}} </td>
+                                <td>{{pr.emailGuest}} </td>
+                                <td>{{pr.phoneGuest}} </td>
+                                <td>{{pr.dateStart}} </td>
+                                <td>{{pr.dateEnd}} </td>
+                                <td>{{pr.additionalInfo}} </td>
+                                <td>
+                                    <ul class="button-group radius">
+                                        <li><button class="tiny radius" ng-click="accept(pr)">Accept</button></li>
+                                        <li><button class="tiny radius alert" ng-click="delete(pr)">Reject</button></li>
+                                    </ul>
+                                </td>
+
+                            </tr>
+
+                            </tbody>
+                        </table>
+                        <div id="pagination" class="row" align="center" width = "50%">
+                            <button class="pull-left btn btn-primary btn-sm" ng-disabled="firstPage()" ng-click="pageBack()">Previos</button>
+                            <span align="center">{{currentPage+1}} from {{numberOfPages()}}</span>
+                            <button class="pull-right  btn btn-primary btn-sm" ng-disabled="lastPage()" ng-click="pageForward()">Next</button>
+                        </div>
+                    </md-content>
+                </md-tab>
+                <md-tab label="Booking" ng-disabled="bookingShow">
+                    <md-content>
+                        <div layout="row" layout-padding layout-wrap layout-fill style="padding-bottom: 32px;" ng-cloak>
+                            <div class="padded" md-whiteframe="1"  layout layout-align="center center">
+                                <span><p class="md-body-3">  Date chek-in:     <small class="md-caption">   {{preorder.dateStart}}</small></p></span>
+                            </div>
+                            <div class="padded" md-whiteframe="2"  layout layout-align="center center">
+                                <span><p class="md-body-3">  Date chek-out:     <small class="md-caption">   {{preorder.dateEnd}}</small>.</p></span>
+                            </div>
+                            <div class="padded" md-whiteframe="3"  layout layout-align="center center">
+                                <span><p class="md-body-3">  Room selected №:<small class="md-caption">{{room.number}}</small>.</p></span>
+                            </div>
+                            <div class="padded" md-whiteframe="3"  layout layout-align="center center">
+                                <span><p class="md-body-3"> Price for night, $ <small class="md-caption">{{room.price}}</small>.</p></span>
+                            </div>
+                             <div class="padded" md-whiteframe="3"  layout layout-align="center center">
+                                <span><p class="md-body-3"> Estimated cost of living, $ <small class="md-caption">{{cost}}</small>.</p></span>
+                            </div>
+                             <div class="padded" md-whiteframe="3"  layout layout-align="center center">
+                                <span><p class="md-body-3"> Guest: <small class="md-caption">{{guest.name}}/{{guest.surname}}/ {{guest.phone}}/{{guest.email}}/{{guest.docNumbername}} </small>.</p></span>
+                            </div>
+                        </div>
+                    </md-content>
+                   <div layout="row">
+                    <md-content>
+                         <md-switch ng-model="searchGuestShow" label=" New Guest / Search guest">
+                        New Guest / Search guest 
+                        </md-switch>
+                    </md-content>
+                   </div>
+                   <div ng-if="searchGuestShow == true">
+                    <md-content class="md-padding">
+                                <div class="form-group">
+                                    <label>Search guest from base (showing last 4 guests)</label>
+                                    <div class="input-group">
+                                        <div class="input-group-addon"><i class="fa fa-search"></i></div>
+                                        <input type="text" class="form-control" placeholder="Search"
+                                               ng-model="searchName">
+                                    </div>
+                                </div>
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Surname</th>
+                                            <th>Country</th>
+                                            <th>Document type</th>
+                                            <th>Document number</th>
+                                            <th>Phone</th>
+                                            <th>Email</th>
+                                            <th></th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr ng-repeat="person in guests | filter: searchName | limitTo: 4">
+                                            <td>{{ person.name }}</td>
+                                            <td>{{ person.surname }}</td>
+                                            <td>{{ person.country.name }}</td>
+                                            <td>{{ person.document.name }}</td>
+                                            <td>{{ person.docNumber}}</td>
+                                            <td>{{ person.phone }}</td>
+                                            <td>{{ person.email }}</td>
+                                            <td>
+                                                <md-button type="submit" ng-click="selectGuest(person)">Select
+                                                </md-button>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                    </md-content>
+                   </div>
+                    <div layout="row" layout-align="start" layout-margin flex="800">
+                        <table>
+                             <tbody>
+                                        <tr>
+                                            <td>
+                                                <md-content>
+                                                <img src="img/passport.jpg">
+                                                <br>
+                                                    <md-icon md-svg-src="img/icons/ic_photo_24px.svg" ></md-icon>
+                                                    <md-button type="submit" ng-click="">Upload foto</md-button>
+                                                </md-content>
+                                            </td>
+                                            <td>
+                                                <md-content>
+
+                                                    <md-input-container class="md-block" flex="100">
+                                                        <label>Name</label>
+                                                        <input ng-model="preorder.nameGuest" ng-disabled="searchGuestShow">
+                                                    </md-input-container>
+
+                                                    <md-input-container class="md-block" flex="100">
+                                                        <label>Last name</label>
+                                                        <input ng-model="preorder.surnameGuest" ng-disabled="searchGuestShow">
+                                                    </md-input-container>
+
+                                                    <md-input-container class="md-block" flex="100">
+                                                        <label>Type document</label>
+                                                        <md-select ng-model="document">
+                                                            <md-option ng-value="ss" ng-repeat="ss in documents" ng-disabled="searchGuestShow">
+                                                                {{ss.name}}
+                                                            </md-option>
+                                                        </md-select>
+                                                    </md-input-container>
+
+                                                    <md-input-container class="md-block" flex="100">
+                                                        <label>Document number</label>
+                                                        <input ng-model="guest.docNumber" ng-disabled="searchGuestShow">
+                                                    </md-input-container>
+
+                                                    <md-input-container class="md-block" flex="100">
+                                                        <label>Country</label>
+                                                        <md-select ng-model="country">
+                                                            <md-option ng-value="ss" ng-disabled="searchGuestShow" ng-repeat="ss in countries">
+                                                                {{ss.name}}
+                                                            </md-option>
+                                                        </md-select>
+                                                    </md-input-container>
+
+                                                    <md-input-container flex="100">
+                                                        <label>Phone</label>
+                                                        <md-icon md-svg-src="img/icons/ic_phone_24px.svg"></md-icon>
+                                                        <input ng-model="preorder.phoneGuest" type="text" placeholder="Phone Number" ng-disabled="searchGuestShow">
+                                                    </md-input-container>
+
+                                                    <md-input-container flex="100">
+                                                        <label>Email</label>
+                                                        <md-icon md-svg-src="img/icons/ic_email_24px.svg" class="email"></md-icon>
+                                                        <input ng-model="preorder.emailGuest" type="email" placeholder="Email (required)" ng-required="true" ng-disabled="searchGuestShow">
+                                                    </md-input-container>
+
+                                                     <label>Info: {{preorder.additionalInfo}}</label>
+                                        <md-button type="submit" ng-click="saveOrder()" ng-disabled="isDisabled">Save Order</md-button>
+                                        <md-button type="submit" ng-click="saveGuest()" ng-disabled="searchGuestShow">Save Guest</md-button>
+                                    </md-content>
+                                   </td>
+                                        </tr>
+                                        </tbody>
+                               </table>
+                    </div>
+                </md-tab>
+
+            </md-tabs>
+        </md-content>
+    </div>
+</div>

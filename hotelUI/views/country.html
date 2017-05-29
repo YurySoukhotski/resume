@@ -1,0 +1,91 @@
+<div ng-controller="CountryController">
+    <div ng-cloak>
+        <md-content>
+            <md-tabs md-dynamic-height md-border-bottom md-selected="selectedIndex">
+                <md-tab label="List Country in base" ng-disabled="startShow">
+                    <md-content class="md-padding">
+                        <input type="text" class="form-control" placeholder="Search .." ng-model="searchName">
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <td>
+                                    <a href="" ng-click="sortType = 'id'; sortReverse = !sortReverse">
+                                        Id Country
+                                        <span ng-show="sortType == 'id' && !sortReverse"
+                                              class="fa fa-caret-down"></span>
+                                        <span ng-show="sortType == 'id' && sortReverse" class="fa fa-caret-up"></span>
+                                    </a>
+                                </td>
+                                <td>
+                                    <a href="" ng-click="sortType = 'name'; sortReverse = !sortReverse">
+                                        Country name
+                                        <span ng-show="sortType == 'name' && !sortReverse"
+                                              class="fa fa-caret-down"></span>
+                                        <span ng-show="sortType == 'name' && sortReverse"
+                                              class="fa fa-caret-up"></span>
+                                    </a>
+                                </td>
+                                <td>
+                                    <a href="">
+                                        Action
+
+                                    </a>
+                                </td>
+
+                            </tr>
+                            </thead>
+
+                            <tbody>
+                            <tr ng-if='country != activeCountry'
+                                ng-repeat="country in countries | orderBy:sortType:sortReverse | filter:searchName | startFrom: startingItem() | limitTo: itemsPerPage">
+                                <td>{{country.id}}</td>
+                                <td>{{country.name}}</td>
+                                <td>
+                                    <a class='btn btn-primary' href='' ng-click='edit(country)'> Edit </a>
+                                    <a class='btn btn-danger' href='' ng-click='delete(Country)'> Delete </a>
+                                </td>
+                            </tr>
+                            <tr ng-if='country == activeCountry'
+                                ng-repeat="country in countries | orderBy:sortType:sortReverse | filter:searchName | startFrom: startingItem() | limitTo: itemsPerPage">
+                                <!-- editable cells -->
+                                <td>{{ country.id }}</td>
+                                <td><input class='form-control' ng-model='country.name' type='text'></td>
+                                <td>
+                                    <a class='btn btn-primary' href='' ng-click='update(country)'> Update </a>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+
+                        <div id="pagination" class="row" align="center">
+                            <button class="pull-left btn btn-primary btn-sm" ng-disabled="firstPage()"
+                                    ng-click="pageBack()">Previos
+                            </button>
+                            <span align="center">{{currentPage+1}} from {{numberOfPages()}}</span>
+                            <button class="pull-right  btn btn-primary btn-sm" ng-disabled="lastPage()"
+                                    ng-click="pageForward()">Next
+                            </button>
+                        </div>
+                    </md-content>
+                </md-tab>
+                <md-tab label="Add Country to Base" ng-disabled="newShow">
+                    <form name="countryForm" ng-submit="save()">
+                    <div layout="row" layout-align="start" layout-margin flex="800">
+                        <md-content>
+                            <div class="row" layout-gt-sm="row">
+                                <md-input-container class="md-block" flex="100">
+                                    <label>Name</label>
+                                    <input ng-model="newS.name" ng-required="true">
+                                </md-input-container>
+                            </div>
+                            <div class="row">
+                                <md-button type="submit" >Save Country</md-button>
+                            </div>
+                        </md-content>
+                    </div>
+                        </form>
+                </md-tab>
+            </md-tabs>
+        </md-content>
+    </div>
+</div>

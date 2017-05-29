@@ -1,0 +1,83 @@
+<md-content class="md-padding">
+    <input type="text" class="form-control" placeholder="Search any words" ng-model="searchName">
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <td>
+                <a href="" ng-click="sortType = 'id'; sortReverse = !sortReverse">
+                    Id Order
+                                        <span ng-show="sortType == 'id' && !sortReverse"
+                                              class="fa fa-caret-down"></span>
+                    <span ng-show="sortType == 'id' && sortReverse" class="fa fa-caret-up"></span>
+                </a>
+            </td>
+            <td>
+                <a href="" ng-click="sortType = 'dateSt'; sortReverse = !sortReverse">
+                    Chek-in date
+                                        <span ng-show="sortType == 'dateSt' && !sortReverse"
+                                              class="fa fa-caret-down"></span>
+                                        <span ng-show="sortType == 'dateSt' && sortReverse"
+                                              class="fa fa-caret-up"></span>
+                </a>
+            </td>
+            <td>
+                <a href="" ng-click="sortType = 'dateEnd'; sortReverse = !sortReverse">
+                    Check-out date
+                                        <span ng-show="sortType == 'dateEnd' && !sortReverse"
+                                              class="fa fa-caret-down"></span>
+                                        <span ng-show="sortType == 'dateEnd' && sortReverse"
+                                              class="fa fa-caret-up"></span>
+                </a>
+            </td>
+            <td>
+                <a href="" ng-click="sortType = 'price'; sortReverse = !sortReverse">
+                    Price
+                                        <span ng-show="sortType == 'price' && !sortReverse"
+                                              class="fa fa-caret-down"></span>
+                                        <span ng-show="sortType == 'price' && sortReverse"
+                                              class="fa fa-caret-up"></span>
+                </a>
+            </td>
+            <td>
+                <a href="" ng-click="sortType = 'orderStatus'; sortReverse = !sortReverse">
+                    Order Status
+                                        <span ng-show="sortType == 'orderStatus' && !sortReverse"
+                                              class="fa fa-caret-down"></span>
+                                        <span ng-show="sortType == 'orderStatus' && sortReverse"
+                                              class="fa fa-caret-up"></span>
+                </a>
+            </td>
+            <td>
+                Action
+            </td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="order in orders | orderBy:sortType:sortReverse | filter:searchName | startFrom: startingItem() | limitTo: itemsPerPage"
+        ">
+        <td>{{order.id}}</td>
+        <td>{{order.dateSt}}</td>
+        <td>{{order.dateEnd}}</td>
+        <td>{{order.price}}</td>
+        <td>{{order.orderStatus}}</td>
+        <td>
+            <ul class="button-group radius">
+                <li>
+                    <button class="tiny radius" ng-click="selectOrder(order)">Select</button>
+                </li>
+            </ul>
+        </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <div id="pagination" class="row" align="center">
+        <button class="pull-left btn btn-primary btn-sm" ng-disabled="firstPage()"
+                ng-click="pageBack()">Previos
+        </button>
+        <span align="center">{{currentPage+1}} from {{numberOfPages()}}</span>
+        <button class="pull-right  btn btn-primary btn-sm" ng-disabled="lastPage()"
+                ng-click="pageForward()">Next
+        </button>
+    </div>
+</md-content>

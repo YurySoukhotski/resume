@@ -1,0 +1,110 @@
+<div ng-controller="MngCtrl">
+    <div>
+        <md-content>
+            <md-tabs md-dynamic-height md-border-bottom md-selected="selectedIndex">
+                <md-tab label="Config hotel" ng-disabled="startShow">
+                    <table class="table table-responsive">
+                        <tbody>
+                        <tr>
+                            <td width="30%">
+                                <md-content>
+                                    <md-input-container class="md-block">
+                                        <label>Hotel Name</label>
+                                        <input ng-model="config.hotelName">
+                                    </md-input-container>
+
+                                    <md-input-container class="md-block">
+                                        <label>Email</label>
+                                        <input ng-model="config.hotelEmail" type="email">
+                                    </md-input-container>
+
+                                    <md-input-container md-no-float class="md-block">
+                                        <label>Phone</label>
+                                        <md-icon md-svg-src="img/icons/ic_phone_24px.svg"></md-icon>
+                                        <input ng-model="config.hotelPhones" type="text" placeholder="Phone Number">
+                                    </md-input-container>
+
+                                    <md-input-container md-no-float class="md-block">
+                                        <label>Fax</label>
+                                        <md-icon md-svg-src="img/icons/ic_phone_24px.svg"></md-icon>
+                                        <input ng-model="config.hotelFax" type="text" placeholder="Fax Number">
+                                    </md-input-container>
+
+                                    <md-input-container class="md-block">
+                                        <label>Address</label>
+                                        <input ng-model="config.adress">
+                                    </md-input-container>
+
+                                    <md-input-container class="md-icon-float md-icon-right md-block">
+                                        <label>Limit Discont 5%</label>
+                                        <md-icon md-svg-src="img/icons/ic_card_giftcard_24px.svg"></md-icon>
+                                        <input ng-model="config.discountLevelFive" type="number">
+                                        <md-icon md-svg-src="img/icons/ic_euro_24px.svg"></md-icon>
+                                    </md-input-container>
+                                    <md-input-container class="md-icon-float md-icon-right md-block">
+                                        <label>Limit Discont 10%</label>
+                                        <md-icon md-svg-src="img/icons/ic_card_giftcard_24px.svg"></md-icon>
+                                        <input ng-model="config.discountLevelTen" type="number">
+                                        <md-icon md-svg-src="img/icons/ic_euro_24px.svg"></md-icon>
+                                    </md-input-container>
+
+                                    <md-button md-no-ink class="md-primary" ng-click="save()">save</md-button>
+
+                                </md-content>
+                            </td>
+                            <td>
+                                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2363.004784158098!2d23.835911315994807!3d53.68254015717652!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x46dfd62497fa16c9%3A0xcd84bad62d9ce618!2z0JPRgNC-0LTQvdC-INCT0L7RgdGC0LjQvdC40YbQsCDQntC80LXQs9Cw!5e0!3m2!1sru!2sru!4v1492754319684"
+                                        width="600" height="450" frameborder="0" style="border:0"
+                                        allowfullscreen></iframe>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                </md-tab>
+                <md-tab label="Day accounting" ng-disabled="acShow">
+                    <div layout="row" layout-align="start" layout-margin flex="800">
+                        <md-content>
+                            <label>Select date to close Accounting </label>
+                            <md-input-container class="md-block" flex-gt-sm>
+                                <label>Date:</label>
+                                <md-datepicker ng-model="dateAccount"></md-datepicker>
+                            </md-input-container>
+                            <div class="row">
+                                <md-button type="submit" ng-click="account()">Close daily account</md-button>
+                                <md-button type="submit" ng-click="getStat()">Reload history</md-button>
+
+                                <label>Items per page:</label>
+                                <input type="number" min="1" max="100" class="form-control" ng-model="pageSize">
+                            </div>
+                    </div>
+                    <div layout-gt-sm="row">
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <td> №</td>
+                                <td> Date:</td>
+                                <td> Cost, $</td>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="s in stats | orderBy:'date':true | limitTo: pageSize">
+                                <td>{{s.id}}</td>
+                                <td> {{s.date}}</td>
+                                <td> {{s.summPeriod}}, $</td>
+
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+        </md-content>
+        </md-tab>
+        </md-tabs>
+        </md-content>
+    </div>
+
+</div>
+
+
+
+

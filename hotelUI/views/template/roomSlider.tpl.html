@@ -1,0 +1,86 @@
+<md-content class="md-padding">
+    <div class="row text-center">
+        <label for="1" class="btn btn-info">Has Bed
+            <input type="checkbox" id="1" ng-model="f.hasBed" class="badgebox" ng-true-value='true'
+                   ng-false-value=''><span class="badge">&check;</span></label>
+        <label for="2" class="btn btn-info">Has TV
+            <input type="checkbox" id="2" ng-model="f.hasTV" class="badgebox" ng-true-value='true'
+                   ng-false-value=''><span class="badge">&check;</span></label>
+        <label for="3" class="btn btn-info">Has Shower
+            <input type="checkbox" id="3" ng-model="f.hasShower" class="badgebox"
+                   ng-true-value='true' ng-false-value=''><span class="badge">&check;</span></label>
+        <label for="4" class="btn btn-info">Has Bathroom
+            <input type="checkbox" id="4" ng-model="f.hasBathroom" class="badgebox"
+                   ng-true-value='true' ng-false-value=''><span class="badge">&check;</span></label>
+        <label for="5" class="btn btn-info">Has Hairdryer
+            <input type="checkbox" id="5" ng-model="f.hasHairdryer" class="badgebox"
+                   ng-true-value='true' ng-false-value=''><span
+                    class="badge"> &check;</span></label>
+        <label for="6" class="btn btn-info">Has Safe
+            <input type="checkbox" id="6" ng-model="f.hasSafe" class="badgebox" ng-true-value='true'
+                   ng-false-value=''><span class="badge">&check;</span></label>
+        <label for="7" class="btn btn-info">Has Fridge
+            <input type="checkbox" id="7" ng-model="f.hasFridge" class="badgebox"
+                   ng-true-value='true' ng-false-value=''><span class="badge">&check;</span></label>
+    </div>
+    <br/>
+
+    <table class="table table-bordered table-striped">
+        <col width="150" valign="top">
+        <col width="250" valign="top">
+        <tbody ng-repeat="room in booking.rooms | filter: f">
+        <tr>
+            <td rowspan="3">
+                <div style="height: 305px">
+                    <div uib-carousel active="active" interval="booking.myInterval"
+                         no-wrap="booking.noWrapSlides">
+                        <div uib-slide ng-repeat="slide in booking.slides track by slide.id"
+                             index="slide.id">
+                            <img ng-src="{{slide.image}}" style="margin:auto;">
+                        </div>
+                    </div>
+                </div>
+
+            </td>
+            <td>
+                <div class="price">
+                    <h6>№ {{room.number}}</h6>
+                    <h5>{{room.price}} BLR</h5>
+                    <span class="annotation">price for night</span><br/>
+                    <i>
+                        Class room:<i> {{room.classRoom}}<br/>
+                        Guest max:{{room.capacity}}</i>
+                        </h5>
+
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="apartmentInfo">
+                    <i>
+                        Additional bed: {{room.hasBed | truefalse}}<br/>
+                        Satelite TV: {{room.hasTV | truefalse}}<br/>
+                        Shower: {{room.hasShower | truefalse}}<br/>
+                        Bathroom: {{room.hasBathroom | truefalse}}<br/>
+                        Safe: {{room.hasSafe | truefalse}}<br/>
+                        Fridge: {{room.hasFridge | truefalse}}<br/>
+                        Hairdryer: {{room.hasHairdryer | truefalse}}
+                    </i>
+
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="col-xs-6 a-right">
+                    <a class='btn btn-primary' href='' ng-click='booking.selectRoom(room)'>Booking
+                        room</a>
+                </div>
+            </td>
+        </tr>
+
+        </tbody>
+
+    </table>
+</md-content>
